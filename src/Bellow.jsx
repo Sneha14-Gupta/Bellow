@@ -1,35 +1,36 @@
 import React from "react";
 import Accordion from "./Accordion";
 
-function Bellow() {
-  const data = [
-    {
-      title: "react vs angular",
-      description: "react is better than angular",
-    },
-    {
-      title: "title2",
-      description: "description2",
-    },
-    {
-      title: "title3",
-      description: "description3",
-    },
-  ];
-  const accordions = [];
-  for (let i = 0; i < data.length; i++) {
-    accordions.push(
-      <Accordion
-        key={crypto.randomUUID()}
-        title={data[i].title}
-        description={data[i].description}
-        isOpen={i === 0}
-      />
-    );
-  }
-  console.log(accordions);
+function Bellow({ data = [], filter = "" }) {
+  // const accordions = data.map(({ title, description }) => {
+  //   return (
+  //     <Accordion
+  //       key={crypto.randomUUID()}
+  //       title={title}
+  //       description={description}
+  //     />
+  //   );
+  // });
   return (
-    <div className="rounded-lg border-zinc-600 border-2 ">{accordions}</div>
+    <div className="rounded-lg border-zinc-600 border-2 ">
+      {data
+        .filter((d) => d.title.toLowerCase().includes(filter))
+        .map((d) => (
+          <Accordion
+            key={crypto.randomUUID()}
+            title={d.title}
+            description={d.description}
+          />
+        ))}
+
+      {/* {data.map((d) => (
+        <Accordion
+          key={crypto.randomUUID()}
+          title={d.title}
+          description={d.description}
+        />
+      ))} */}
+    </div>
   );
 }
 
