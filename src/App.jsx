@@ -19,7 +19,7 @@ function App() {
   // ];
   return (
     <div className="flex items-center justify-center h-screen">
-      <Bellow data={items} filter="" isOpen={false} underline={false} showWordCount={true} handleClick={() => {alert("clicked")}} />
+      <Bellow data={items} filter="" isOpen={false} underline={false} showWordCount={true} handleClick={(value) => {console.warn(value)}} />
     </div>
   );
 }

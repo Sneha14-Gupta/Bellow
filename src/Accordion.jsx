@@ -12,7 +12,7 @@ function Accordion({
     <details
       className="w-80 m-1 p-2 bg-stone-200 "
       open={isOpen}
-      onClick={handleClick}
+      onClick={()=>handleClick(title)}
     >
       <summary
         className={`cursor-pointer font-bold hover:underline ${
