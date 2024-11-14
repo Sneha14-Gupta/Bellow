@@ -1,7 +1,7 @@
 import React from "react";
 import Accordion from "./Accordion";
 
-function Bellow({ data = [], filter = "" }) {
+function Bellow({ data = [], filter = "" ,isOpen = false ,underline=true,showWordCount=false,handleClick=()=>{} }) {
   // const accordions = data.map(({ title, description }) => {
   //   return (
   //     <Accordion
@@ -20,6 +20,10 @@ function Bellow({ data = [], filter = "" }) {
             key={crypto.randomUUID()}
             title={d.title}
             description={d.description}
+            isOpen={isOpen}
+            underline={underline}
+            showWordCount={showWordCount}
+            handleClick={handleClick}
           />
         ))}
 
@@ -33,5 +37,6 @@ function Bellow({ data = [], filter = "" }) {
     </div>
   );
 }
+
 
 export default Bellow;
