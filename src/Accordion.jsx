@@ -1,30 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 
 function Accordion({
-  title = "title",
-  description = "description",
+  title = 'Title',
+  description = 'Description',
   isOpen = false,
   underline = true,
   showWordCount = false,
-  handleClick=()=>{},
+  onClick = () => {},
 }) {
+  const [readTime, setReadTime] = useState(0);
+
+  useEffect(() => {
+    fetch('https:///', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        text: description,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => setReadTime(data.seconds));
+  });
+
   return (
     <details
-      className="w-80 m-1 p-2 bg-stone-200 "
+      className="w-80 bg-stone-100 m-1 p-2 rounded"
       open={isOpen}
-      onClick={()=>handleClick(title)}
+      onClick={() => onClick(title)}
     >
-      <summary
-        className={`cursor-pointer font-bold hover:underline ${
-          underline && "hover:underline"
-        }`}
-      >
-        {title}{" "}
-        <span className="font-normal text-stone-600">
-          &mdash; {showWordCount && `${description.split(" ").length} words`}
+      <summary className={`cursor-pointer font-bold text-stone-900`}>
+        <span className={`${underline && 'hover:underline'}`}>{title}</span>
+        <span className="font-normal text-zinc-600 text-sm ml-3">
+          {showWordCount && `${readTime} seconds`}
         </span>
       </summary>
-      <p className="text-stone-600">{description}</p>
+      <p className="text-stone-800">{description}</p>
     </details>
   );
 }
